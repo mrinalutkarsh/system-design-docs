@@ -1,4 +1,4 @@
-# 🌸 Bloom Filter — The Ultimate Guide (Interview-Ready)
+# 🌸 Bloom Filter
 
 > **TL;DR**
 > A **Bloom Filter** is a **probabilistic data structure** used to test **set membership** quickly and memory-efficiently — with **false positives allowed**, but **false negatives impossible**.
