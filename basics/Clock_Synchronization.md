@@ -524,5 +524,49 @@ public class SnowflakeIdGenerator {
 
 -----
 
-*Complete guide to Clock Synchronization in Distributed Systems*  
-*With practical examples and real-world implementations*
+# ⏱️ Clock Synchronisation & Unique IDs  
+## NTP explained + Snowflake ID demystified ❄️
+
+---
+
+## 1️⃣ Why Clock Synchronisation Matters ⏰
+
+In distributed systems:
+
+- Logs must be **time-ordered**
+- Databases rely on **timestamps**
+- Tokens & certificates **expire**
+- IDs may depend on **time**
+
+💥 **Unsynced clocks = chaos**
+- Requests appear to arrive *before* they’re sent
+- Replication conflicts
+- Duplicate or out-of-order IDs
+
+This is why **clock synchronisation** is a *core infrastructure problem*.
+
+---
+
+## 2️⃣ What is NTP? (Network Time Protocol) 🌍
+
+**NTP** is a protocol used to synchronise clocks of computers over a network.
+
+👉 It doesn’t make clocks *exactly equal*, but keeps them **close enough** (usually within milliseconds).
+
+---
+
+## 3️⃣ How NTP Actually Works (Step-by-Step) 🔍
+
+### 📡 Basic Idea
+
+A client asks a **time server**:
+> “What time is it *now*?”
+
+But network delays exist, so NTP estimates and corrects for them.
+
+---
+
+### 🧠 The 4-Timestamp Trick
+
+When syncing time, **four timestamps** are involved:
+
