@@ -1,8 +1,3 @@
-Below is a clean, consolidated “2-page” explanation you can read once and reuse for interviews, system design, and real-world understanding.
-No hand-waving, no magic — just clear flow + diagrams + Java-level reality.
-
-⸻
-
 🔐 Public Key Encryption — A Complete, Practical Explanation
 
 1️⃣ The Problem We’re Solving
