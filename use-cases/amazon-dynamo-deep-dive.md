@@ -493,6 +493,7 @@ Example:
 ```
 {A:2, B:1, C:3}
 ```
+![Conflict resolution using vector clocks](../images/conflictResolutionUsingVectorClocks.png)
 
 ### How Vector Clocks Work
 
