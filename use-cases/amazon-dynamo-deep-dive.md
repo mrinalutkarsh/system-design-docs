@@ -417,6 +417,71 @@ If failure probability exceeds threshold:
 - Hinted handoff activates
 
 ---
+#### 🌱 Seeds and **Logical Partitions** in the Dynamo Ring
+
+**Seed nodes** are a small set of **externally discoverable, well-known nodes** (for example via static IPs or DNS).
+
+Their purpose is **not data storage or coordination**, but **cluster discovery**.
+
+---
+
+#### 🚨 What “logical partition” means here
+
+A **logical partition** means the cluster **accidentally splits into two or more independent rings**, for example:
+
+* Network hiccup
+* Restarted nodes
+* Misconfigured nodes
+
+Each group thinks:
+
+> *“I am the whole cluster.”*
+
+This is dangerous because:
+
+* Each ring assigns tokens independently
+* Same key maps to different nodes
+* Data diverges permanently
+
+---
+
+#### 🛡️ How seed nodes prevent this
+
+1. When a node starts, it **must contact a seed node**
+2. The seed node provides the **existing ring metadata**
+3. The node **joins the existing ring**, instead of forming a new one
+4. Gossip then spreads the correct membership info
+
+Because all nodes are configured with the **same seed nodes**, they all converge on **one shared ring view**.
+
+---
+
+#### ❗ Why “externally discoverable” matters
+
+* Seeds are reachable via:
+
+  * Static IPs
+  * DNS
+  * Load-balanced endpoints
+* Even after restarts or partial outages, nodes can **re-discover the original ring**
+
+Without seeds:
+
+* Nodes may fail to find each other
+* Multiple rings may form unintentionally
+
+---
+
+#### 🎯 One-paragraph summary (interview-ready)
+
+> **Seed nodes are externally discoverable contact points that allow nodes to discover the existing Dynamo ring during startup. By ensuring that new or restarting nodes join the same ring instead of forming isolated ones, seed nodes help prevent logical partitions of the cluster.**
+
+---
+
+#### 🧠 One-line mental model
+
+> **Seeds stop “split-brain rings” by giving every node the same starting point.**
+
 
 ## 🛠️ Anti-Entropy (Merkle Trees)
 
